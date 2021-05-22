@@ -20,7 +20,7 @@ class _HostDetailsState extends State<HostDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         bottomOpacity: 0.0,
         elevation: 0.0,
       ),
