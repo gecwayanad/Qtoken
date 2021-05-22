@@ -5,6 +5,7 @@ import 'package:qtoken/screens/hostDetailsCollection.dart';
 
 import 'package:qtoken/screens/hostque.dart';
 import 'package:qtoken/screens/joineData.dart';
+import 'package:qtoken/screens/joinePage.dart';
 
 import 'package:qtoken/screens/sighin.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -143,7 +144,7 @@ class _HomePageState extends State<HomePage> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (_) => JoineData()));
+                                      builder: (_) => JoinePage()));
                             },
                             child: Padding(
                               padding: EdgeInsets.symmetric(
