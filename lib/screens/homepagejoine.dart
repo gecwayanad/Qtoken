@@ -7,7 +7,7 @@ import 'package:qtoken/screens/joinePage.dart';
 class HomePageJoine extends StatefulWidget {
   String organiisationNameToShow;
   String queueNameToShow;
-  HomePageJoine({this.organiisationNameToShow, this.queueNameToShow})
+  HomePageJoine({this.organiisationNameToShow, this.queueNameToShow});
   @override
   _HomePageJoineState createState() => _HomePageJoineState();
 }
@@ -35,7 +35,7 @@ class _HomePageJoineState extends State<HomePageJoine> {
             stream: _reference.snapshots(),
             builder: (context,AsyncSnapshot<DocumentSnapshot> snapshot) {
               return ListView.builder( 
-              itemCount: snapshot.hasData?snapshot.data.docs.length:0,
+              itemCount: snapshot.hasData?snapshot.data.data().length:0,
               itemBuilder: (_, index){
 
 
@@ -57,12 +57,12 @@ class _HomePageJoineState extends State<HomePageJoine> {
                                             
                           
                           children: [
-                            Text(snapshot.data.docs[index].id, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, 
+                            Text(snapshot.data[index].id, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, 
                             color: Colors.black
                             
                             ),),
                             SizedBox(height: 10,),
-                            Text(snapshot.data.docs[index].get("adress"), style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal, 
+                            Text(snapshot.data[index].id, style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal, 
                             color: Colors.black87
                             
                             ),),
