@@ -2,15 +2,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:qtoken/screens/homepagejoine.dart';
+import 'package:qtoken/screens/hostDetailsCollection.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:qtoken/screens/joineData.dart';
 
 class JoinQue extends StatefulWidget {
-  DocumentReference joinref;
+  
   int count;
   String orgname;
   String queName;
-  JoinQue({ this.count, this.joinref, this.orgname, this.queName});
+  JoinQue({ this.count, this.orgname, this.queName});
   @override
   _JoinQueState createState() => _JoinQueState();
 }
@@ -21,7 +23,8 @@ class _JoinQueState extends State<JoinQue> {
   
   @override
   Widget build(BuildContext context) {
-    DocumentReference ref = FirebaseFirestore.instance.collection("organisations").doc(widget.orgname).collection('que').doc(widget.queName);
+    String orgnisationName = widget.orgname;
+    String queueName = widget.queName;
     
     return Scaffold(
       appBar: AppBar(
@@ -38,20 +41,11 @@ class _JoinQueState extends State<JoinQue> {
               Text("peoples in the que ${widget.count}"),
               // Text("current token number 4"),
               RaisedButton(onPressed: ()async{
-              SharedPreferences userData = await SharedPreferences.getInstance();
-          
-              final name = userData.getString('name');
-              final adress = userData.getString('adress');
-              // Map data = new Map();
-              ref.get().then((value) {
-                  final all = value.data();
-                  all['$name'] = '$adress';
-
-                ref.set(
-
-                  all
-                );
-              });
+                Navigator.push(context, MaterialPageRoute(builder: (_)=> JoineData(
+                  organisationNameForJoin: orgnisationName,
+                  queueNameForJoin: queueName,
+                )));
+             
         
               // ref.set({
 
