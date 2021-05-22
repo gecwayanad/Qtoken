@@ -1,3 +1,4 @@
+import 'package:carousel_pro/carousel_pro.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:qtoken/screens/hostDetailsCollection.dart';
@@ -44,14 +45,12 @@ class _HomePageState extends State<HomePage> {
         drawer: Drawer(
             elevation: 1,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Container(
-                  width: 200,
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: ElevatedButton(
+                  padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                  child: TextButton(
                     child: Text(
-                      "LogOut",
+                      "Logout",
                       style: TextStyle(fontSize: 20),
                     ),
                     onPressed: () async {
@@ -62,11 +61,10 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 Container(
-                  width: 200,
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: ElevatedButton(
+                  padding: EdgeInsets.symmetric(horizontal: 0),
+                  child: TextButton(
                     child: Text(
-                      "About Us",
+                      "About",
                       style: TextStyle(fontSize: 20),
                     ),
                     onPressed: () {
@@ -74,9 +72,12 @@ class _HomePageState extends State<HomePage> {
                     },
                   ),
                 ),
-                Text(
-                  "Copyrights@icpro",
-                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 500),
+                  child: Text(
+                    "Copyrights@icpro",
+                  ),
+                )
               ],
             )),
         body: Container(
@@ -90,6 +91,29 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 40),
+                    child: SizedBox(
+                      height: 400,
+                      width: double.infinity,
+                      child: Carousel(
+                        dotSize: 4.0,
+                        dotColor: Colors.grey,
+                        dotBgColor: Colors.transparent,
+                        dotIncreasedColor: Colors.grey,
+                        images: [
+                          Image.asset(
+                            'asset/images/hint1.png',
+                            fit: BoxFit.cover,
+                          ),
+                          Image.asset(
+                            'asset/images/hint2.png',
+                            fit: BoxFit.cover,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
                   Container(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
