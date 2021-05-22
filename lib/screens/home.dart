@@ -1,11 +1,10 @@
-import 'package:carousel_pro/carousel_pro.dart';
+// import 'package:carousel_pro/carousel_pro.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:qtoken/screens/hostDetailsCollection.dart';
 
 import 'package:qtoken/screens/hostque.dart';
 import 'package:qtoken/screens/joineData.dart';
-import 'package:qtoken/screens/joinePage.dart';
 
 import 'package:qtoken/screens/sighin.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -68,9 +67,8 @@ class _HomePageState extends State<HomePage> {
                       "About",
                       style: TextStyle(fontSize: 20),
                     ),
-                    ElevatedButton(
-                    onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (_)=> JoinePage()));
+                    onPressed: () {
+                      print("hi");
                     },
                   ),
                 ),
