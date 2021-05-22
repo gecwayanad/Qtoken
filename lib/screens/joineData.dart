@@ -2,10 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:qtoken/screens/joinePage.dart';
+import 'package:qtoken/screens/homepagejoine.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class JoineData extends StatefulWidget {
+  String organisationNameForJoin;
+  String queueNameForJoin;
+  JoineData({this.organisationNameForJoin, this.queueNameForJoin});
   @override
   _JoineDataState createState() => _JoineDataState();
 }
@@ -20,6 +23,8 @@ class _JoineDataState extends State<JoineData> {
   TextEditingController adressOfJoinee = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    DocumentReference ref = FirebaseFirestore.instance.collection("organisations").doc(widget.organisationNameForJoin)
+    .collection('que').doc(widget.queueNameForJoin);
     CollectionReference joinePersonal = _firestore.collection("users");
     return Scaffold(
       body:Container(
@@ -40,22 +45,29 @@ class _JoineDataState extends State<JoineData> {
                
             ),
             RaisedButton(onPressed: ()async{
-              try {
-                User user = _auth.currentUser;
-                SharedPreferences userData = await SharedPreferences.getInstance();
-                userData.setString("name",nameOfJoinee.text );
-                userData.setString("adress",adressOfJoinee.text );
-                // joinePersonal.doc(user.uid).set({
-                //   nameOfJoinee.text:adressOfJoinee.text
-                // });
-              } catch (e) {
-                print(e);
-              }
+           
 
-                 Navigator.push(context, MaterialPageRoute(builder: (_)=> JoinePage()));
-             
+                User user = _auth.currentUser;
+
+                 Navigator.push(context, MaterialPageRoute(builder: (_)=> HomePageJoine()));
+                // Map data = new Map();
+                List dataconvert;
+                ref.get().then((value) {
+                    final all = value.data();
+                    int dataleng = all.length+1;
+                    all['${dataleng}'] = '${adressOfJoinee.text + '///' +nameOfJoinee.text}';
+                    
+
+                  ref.set(
+
+                    all
+                  );
+                }).whenComplete((){
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=> HomePageJoine()));
+                });
+              
                 },
-                child: Text("submit"),
+                child: Text("Join"),
                 )
           ],
         )),

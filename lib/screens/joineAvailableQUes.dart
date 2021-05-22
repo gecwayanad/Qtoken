@@ -32,7 +32,7 @@ class _JoineAvailableQueState extends State<JoineAvailableQue> {
                   onTap: (){
                    Navigator.push(context, MaterialPageRoute(builder: (_)=> JoinQue(
                    count: snapshot.data.docs[index].data().values.length,
-                   joinref: snapshot.data.docs[index].reference,
+                  //  joinref: snapshot.data.docs[index].reference,
                    queName:snapshot.data.docs[index].id ,
                    orgname: widget.nameOfOrg,
                    )));
