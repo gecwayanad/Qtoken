@@ -9,6 +9,7 @@ import 'package:qtoken/screens/joinePage.dart';
 
 import 'package:qtoken/screens/sighin.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 String FinalEmail;
 
@@ -123,11 +124,23 @@ class _HomePageState extends State<HomePage> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20)),
                             color: Colors.grey,
-                            onPressed: () {
-                              Navigator.push(
+                            onPressed: () async{
+                              SharedPreferences preferences = await SharedPreferences.getInstance();
+                              final presaved = preferences.getString('users organisations');
+                              
+                              if(presaved == ''){
+                                Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (_) => HostDetails()));
+                              }else{
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) =>HostQuePage(
+                                        nameOforganiationtransfer: presaved,
+                                      )));
+                              }
                             },
                             child: Padding(
                               padding: EdgeInsets.symmetric(

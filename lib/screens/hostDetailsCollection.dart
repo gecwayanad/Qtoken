@@ -49,7 +49,7 @@ class _HostDetailsState extends State<HostDetails> {
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20)),
-                      labelText: "Discription",
+                      labelText: "adress",
                     )),
               ),
               Padding(
@@ -68,6 +68,10 @@ class _HostDetailsState extends State<HostDetails> {
                 color: Colors.grey[600],
                 textColor: Colors.white,
                 onPressed: () async {
+                  //adding data to shared
+                  SharedPreferences preferences = await SharedPreferences.getInstance();
+                  preferences.setString('users organisations', nameOfOrg.text);
+
                   DocumentReference ref = FirebaseFirestore.instance
                       .collection("organisations")
                       .doc("${nameOfOrg.text}");
@@ -75,7 +79,7 @@ class _HostDetailsState extends State<HostDetails> {
                   ref.set(
                     {
                       'name': '${nameOfOrg.text}',
-                      'adress': '${discription.text}',
+                      'discription': '${discription.text}',
                     },
                   ).whenComplete(() {
                     Navigator.push(
