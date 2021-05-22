@@ -4,6 +4,7 @@ import 'package:qtoken/screens/hostDetailsCollection.dart';
 
 import 'package:qtoken/screens/hostque.dart';
 import 'package:qtoken/screens/joineData.dart';
+import 'package:qtoken/screens/joinePage.dart';
 
 import 'package:qtoken/screens/sighin.dart';
 
@@ -90,7 +91,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     ElevatedButton(
                     onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (_)=> JoineData()));
+                      Navigator.push(context, MaterialPageRoute(builder: (_)=> JoinePage()));
                     },
                     child: Text("Join Que")
                     )
