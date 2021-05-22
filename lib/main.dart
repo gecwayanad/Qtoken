@@ -8,8 +8,6 @@ import 'screens/home.dart';
 import 'screens/sighin.dart';
 import 'services/auth.dart';
 
-
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -30,6 +28,9 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Firebase Authentication',
+        theme: ThemeData(
+          primarySwatch: Colors.grey,
+        ),
         home: Authenticate(),
       ),
     );
@@ -49,7 +50,4 @@ class Authenticate extends StatelessWidget {
     }
     return SignIn();
   }
-}//added something.....
-
-
-
+} //added something.....
