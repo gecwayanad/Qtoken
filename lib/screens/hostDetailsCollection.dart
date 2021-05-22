@@ -11,60 +11,81 @@ class HostDetails extends StatefulWidget {
 }
 
 class _HostDetailsState extends State<HostDetails> {
-
   TextEditingController nameOfOrg = TextEditingController();
   TextEditingController discription = TextEditingController();
   TextEditingController nameque = TextEditingController();
   FirebaseAuth _auth = FirebaseAuth.instance;
-  
-  
+
   @override
   Widget build(BuildContext context) {
-   
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        bottomOpacity: 0.0,
+        elevation: 0.0,
+      ),
       body: Container(
         child: Form(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              TextFormField(
-                controller: nameOfOrg,
-                decoration:InputDecoration(
-                  labelText: "user organisation",
-
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: TextFormField(
+                  controller: nameOfOrg,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    labelText: "Organisation name",
+                  ),
                 ),
               ),
-                TextFormField(
-                  controller: discription,
-                decoration:InputDecoration(
-                  labelText: "discription",
-                  
-                )
-                ),TextFormField(
-                  controller: nameque,
-                decoration:InputDecoration(
-                  labelText: "name of que",
-                  
-                )
-                ),
-                RaisedButton(onPressed: ()async{
-                  
-                   DocumentReference ref = FirebaseFirestore.instance
-                   .collection("organisations")
-                   .doc("${nameOfOrg.text}");
-                   ref.collection("que").doc(nameque.text).set({});
-                   ref.set({
-                     'name':'${nameOfOrg.text}',
-                     'adress':'${discription.text}',
-                     
-                   },
-                   
-                   ).whenComplete((){
-                      Navigator.push(context, MaterialPageRoute(builder: (_)=> HostQuePage(nameOforganiationtransfer: nameOfOrg.text,
-                      nameOfQueTransfer: nameque.text,
-                      )));
-                   });
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: TextFormField(
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    controller: discription,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      labelText: "Discription",
+                    )),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(20, 0, 20, 30),
+                child: TextFormField(
+                    controller: nameque,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      labelText: "Name of que",
+                    )),
+              ),
+              RaisedButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                color: Colors.grey[600],
+                textColor: Colors.white,
+                onPressed: () async {
+                  DocumentReference ref = FirebaseFirestore.instance
+                      .collection("organisations")
+                      .doc("${nameOfOrg.text}");
+                  ref.collection("que").doc(nameque.text).set({});
+                  ref.set(
+                    {
+                      'name': '${nameOfOrg.text}',
+                      'adress': '${discription.text}',
+                    },
+                  ).whenComplete(() {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => HostQuePage(
+                                  nameOforganiationtransfer: nameOfOrg.text,
+                                  nameOfQueTransfer: nameque.text,
+                                )));
+                  });
                   // User user = _auth.currentUser;
                   // try {
                   //    ref.doc("").set({
@@ -76,12 +97,9 @@ class _HostDetailsState extends State<HostDetails> {
                   // } catch (e) {
                   //   print(e);
                   // }
-
                 },
                 child: Text("submit"),
-                )
-              
-              
+              )
             ],
           ),
         ),
