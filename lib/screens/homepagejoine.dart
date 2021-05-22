@@ -1,8 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:qtoken/screens/joineAvailableQUes.dart';
-import 'package:qtoken/screens/joinePage.dart';
 
 class HomePageJoine extends StatefulWidget {
   String organiisationNameToShow;
@@ -13,22 +10,14 @@ class HomePageJoine extends StatefulWidget {
 }
 
 class _HomePageJoineState extends State<HomePageJoine> {
-  
-  
   @override
   Widget build(BuildContext context) {
-    String orgnisationName = widget.organiisationNameToShow;
-    String queueName = widget.queueNameToShow;
-    DocumentReference _reference = FirebaseFirestore.instance.collection("organisation").doc(orgnisationName).collection("que").doc(queueName);
+
+    DocumentReference _reference = FirebaseFirestore.instance.collection('organisation').doc(widget.organiisationNameToShow);
     return Scaffold(
       appBar: AppBar(
         title: Text("joined ques"),
 
-      ),
-      floatingActionButton: FloatingActionButton(child: Icon(Icons.group_add),
-      onPressed: (){
-        Navigator.push(context, MaterialPageRoute(builder: (_)=>JoinePage()));
-      },
       ),
       body:  Container(
           child: StreamBuilder(
