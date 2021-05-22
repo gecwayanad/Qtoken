@@ -21,6 +21,8 @@ class _JoineDataState extends State<JoineData> {
   TextEditingController adressOfJoinee = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    String orgnamepassingHomepage = widget.organisationNameForJoin;
+    String queuenamepassingHomepage = widget.queueNameForJoin;
     DocumentReference ref = FirebaseFirestore.instance
         .collection("organisations")
         .doc(widget.organisationNameForJoin)
@@ -65,16 +67,21 @@ class _JoineDataState extends State<JoineData> {
                   context, MaterialPageRoute(builder: (_) => HomePageJoine()));
               // Map data = new Map();
               List dataconvert;
+              int dataleng;
               ref.get().then((value) {
                 final all = value.data();
-                int dataleng = all.length + 1;
+                dataleng = all.length + 1;
                 all['${dataleng}'] =
-                    '${adressOfJoinee.text + '///' + nameOfJoinee.text}';
+                    '${nameOfJoinee.text + '\n' + adressOfJoinee.text}';
 
                 ref.set(all);
               }).whenComplete(() {
                 Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (_) => HomePageJoine()));
+                    MaterialPageRoute(builder: (_) => HomePageJoine(
+                      count:dataleng,
+                      organiisationNameToShow: orgnamepassingHomepage,
+                      queueNameToShow: queuenamepassingHomepage,
+                    )));
               });
             },
             child: Text("Join"),

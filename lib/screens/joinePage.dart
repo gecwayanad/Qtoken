@@ -68,7 +68,7 @@ class _JoinePageState extends State<JoinePage> {
                                       height: 10,
                                     ),
                                     Text(
-                                      snapshot.data.docs[index].get("adress"),
+                                      snapshot.data.docs[index].get("discription"),
                                       style: TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.normal,
