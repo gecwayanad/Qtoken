@@ -16,62 +16,71 @@ class JoineData extends StatefulWidget {
 class _JoineDataState extends State<JoineData> {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
   FirebaseAuth _auth = FirebaseAuth.instance;
-  
-
 
   TextEditingController nameOfJoinee = TextEditingController();
   TextEditingController adressOfJoinee = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    DocumentReference ref = FirebaseFirestore.instance.collection("organisations").doc(widget.organisationNameForJoin)
-    .collection('que').doc(widget.queueNameForJoin);
+    DocumentReference ref = FirebaseFirestore.instance
+        .collection("organisations")
+        .doc(widget.organisationNameForJoin)
+        .collection('que')
+        .doc(widget.queueNameForJoin);
     CollectionReference joinePersonal = _firestore.collection("users");
     return Scaffold(
-      body:Container(
-        child: Form(child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextFormField(
+        body: Container(
+      child: Form(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: TextFormField(
               controller: nameOfJoinee,
               decoration: InputDecoration(
-                labelText: "name"
+                labelText: "name",
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
               ),
             ),
-            TextFormField(
+          ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(20, 20, 20, 50),
+            child: TextFormField(
               controller: adressOfJoinee,
               decoration: InputDecoration(
-                labelText: "adress"
+                labelText: "adress",
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
               ),
-               
             ),
-            RaisedButton(onPressed: ()async{
-           
+          ),
+          RaisedButton(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            onPressed: () async {
+              User user = _auth.currentUser;
 
-                User user = _auth.currentUser;
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => HomePageJoine()));
+              // Map data = new Map();
+              List dataconvert;
+              ref.get().then((value) {
+                final all = value.data();
+                int dataleng = all.length + 1;
+                all['${dataleng}'] =
+                    '${adressOfJoinee.text + '///' + nameOfJoinee.text}';
 
-                 Navigator.push(context, MaterialPageRoute(builder: (_)=> HomePageJoine()));
-                // Map data = new Map();
-                List dataconvert;
-                ref.get().then((value) {
-                    final all = value.data();
-                    int dataleng = all.length+1;
-                    all['${dataleng}'] = '${adressOfJoinee.text + '///' +nameOfJoinee.text}';
-                    
-
-                  ref.set(
-
-                    all
-                  );
-                }).whenComplete((){
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=> HomePageJoine()));
-                });
-              
-                },
-                child: Text("Join"),
-                )
-          ],
-        )),
-      )
-    );
+                ref.set(all);
+              }).whenComplete(() {
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (_) => HomePageJoine()));
+              });
+            },
+            child: Text("Join"),
+          )
+        ],
+      )),
+    ));
   }
 }
