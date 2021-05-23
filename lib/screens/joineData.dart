@@ -76,12 +76,12 @@ class _JoineDataState extends State<JoineData> {
 
                 ref.set(all);
               }).whenComplete(() {
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (_) => HomePageJoine(
-                      count:dataleng,
-                      organiisationNameToShow: orgnamepassingHomepage,
-                      queueNameToShow: queuenamepassingHomepage,
-                    )));
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (_) => HomePageJoine(
+                          count: dataleng,
+                          organiisationNameToShow: orgnamepassingHomepage,
+                          queueNameToShow: queuenamepassingHomepage,
+                        )));
               });
             },
             child: Text("Join"),
