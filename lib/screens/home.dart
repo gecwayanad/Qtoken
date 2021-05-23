@@ -83,18 +83,19 @@ class _HomePageState extends State<HomePage> {
               ],
             )),
         body: Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-              image: AssetImage('asset/images/background.png'),
-              fit: BoxFit.cover,
-            )),
+            color: Colors.white,
+            //decoration: BoxDecoration(
+            //  image: DecorationImage(
+            //image: AssetImage('asset/images/background.png'),
+            //fit: BoxFit.cover,
+            //)),
             child: Padding(
               padding: const EdgeInsets.only(bottom: 20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 0, 40),
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 100),
                     child: SizedBox(
                       height: 400,
                       width: double.infinity,
@@ -124,22 +125,25 @@ class _HomePageState extends State<HomePage> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20)),
                             color: Colors.grey,
-                            onPressed: () async{
-                              SharedPreferences preferences = await SharedPreferences.getInstance();
-                              final presaved = preferences.getString('users organisations');
-                              
-                              if(presaved == ''){
+                            onPressed: () async {
+                              SharedPreferences preferences =
+                                  await SharedPreferences.getInstance();
+                              final presaved =
+                                  preferences.getString('users organisations');
+
+                              if (presaved == '') {
                                 Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => HostDetails()));
-                              }else{
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => HostDetails()));
+                              } else {
                                 Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) =>HostQuePage(
-                                        nameOforganiationtransfer: presaved,
-                                      )));
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => HostQuePage(
+                                              nameOforganiationtransfer:
+                                                  presaved,
+                                            )));
                               }
                             },
                             child: Padding(
