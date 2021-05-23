@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: MaterialApp(
-        title: 'Firebase Authentication',
+        title: 'Qtoken',
         theme: ThemeData(
           primarySwatch: Colors.grey,
         ),
