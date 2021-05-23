@@ -50,7 +50,7 @@ class _JoinQueState extends State<JoinQue> {
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(110, 90, 20, 20),
                     child: Text(
-                      "${widget.count}",
+                      "${widget.count + 1}",
                       style: TextStyle(fontSize: 50, color: Colors.black),
                     ),
                   ),
