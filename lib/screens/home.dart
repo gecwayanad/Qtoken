@@ -124,22 +124,25 @@ class _HomePageState extends State<HomePage> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20)),
                             color: Colors.grey,
-                            onPressed: () async{
-                              SharedPreferences preferences = await SharedPreferences.getInstance();
-                              final presaved = preferences.getString('users organisations');
-                              
-                              if(presaved == ''){
+                            onPressed: () async {
+                              SharedPreferences preferences =
+                                  await SharedPreferences.getInstance();
+                              final presaved =
+                                  preferences.getString('users organisations');
+
+                              if (presaved == '') {
                                 Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => HostDetails()));
-                              }else{
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => HostDetails()));
+                              } else {
                                 Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) =>HostQuePage(
-                                        nameOforganiationtransfer: presaved,
-                                      )));
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => HostQuePage(
+                                              nameOforganiationtransfer:
+                                                  presaved,
+                                            )));
                               }
                             },
                             child: Padding(
